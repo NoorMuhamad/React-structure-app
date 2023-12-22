@@ -1,16 +1,9 @@
-import axios from 'axios';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { endPoints } from '../api/endPoints';
 
-const BASE_URL = 'https://api.example.com';
-
-const apiService = axios.create({
-    baseURL: BASE_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
+export const apiService = createApi({
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://dummy.restapiexample.com/api/v1/' }),
+    endPoints,
 });
 
-export const getAllItems = () => apiService.get('/items');
-export const getItemById = (itemId) => apiService.get(`/items/${itemId}`);
-export const createItem = (data) => apiService.post('/items', data);
-export const updateItem = (itemId, data) => apiService.put(`/items/${itemId}`, data);
-export const deleteItem = (itemId) => apiService.delete(`/items/${itemId}`);
+export const { useGetEmployeesQuery, useAddEmployeeMutation } = apiService;
